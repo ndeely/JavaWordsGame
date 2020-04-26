@@ -1034,4 +1034,12 @@ public class LimitedVocabulary{
 		"zoologist"
 	};  // here ends the 1D array of words
 
+	public boolean isValidWord(String attempt) {
+		for(String word:this.words) {
+			if(attempt.equalsIgnoreCase(word)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
