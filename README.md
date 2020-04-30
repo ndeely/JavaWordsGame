@@ -35,7 +35,7 @@ b)	Two devices use the same IP address.
 To solve this problem, the ARP table entry for this IP address must be deleted or updated.
 
 TCP/IP and Ethernet:
-In the TCP/IP model, ethernet is part of layer 2, the data-link layer. It provides a set of standards to allow devices to communicate with each other and send information at high speeds. These standards ensure that devices can communicate with each other to create and send frames between nodes on a network, with features such as error checking to ensure frames are not lost in the process. The nodes are identified by the unique MAC addresses provided by the NIC on each device. These MAC addresses are included in each frame when it is created at the data-link layer.
+In the TCP/IP model, ethernet (also known as IEEE 802.3 or CSMA/CD) is part of layer 2, the data-link layer. It provides a set of standards to allow devices to communicate with each other over a network and send information at high speeds. These standards ensure that devices can communicate with each other to create and send frames between nodes on a network, with features such as collision detection to ensure frames are not lost in the process. The nodes are identified by the unique MAC addresses provided by the NIC on each device. These MAC addresses are included in each frame when it is created at the data-link layer.
 
 1)	https://networkencyclopedia.com/horizontal-cabling/
 
@@ -44,18 +44,11 @@ In the TCP/IP model, ethernet is part of layer 2, the data-link layer. It provid
 
 
 Answer:
-/* summary of potential answer, wont be included in final */
-Pick 2 computer architectures (MIPS, x86, Pentium 2, AMD)
-Outline and describe bottlenecks, highlight ways to overcome them
-
-Select architecture with PCI/ISA buses
-Discuss objectives of memory management in a modern OS
-/* wont be included in final */
 
 MIPS 1:
 
 	MIPS (Microprocessor without Interlocked Pipelined Stages) is a Reduced Instruction Set Computer (RISC) Instruction Set Architecture (ISA). MIPS 1, which was formerly known as MIPS before the introduction of MIPS 2, was introduced in 1985.
-As the name MIPS suggests, a major aspect of the design of these microprocessors was to avoid the use of interlocking pipelined stages, and instead to fit every sub-phase, including cache-access, of the instructions into one cycle. The idea was that this would minimise throughput by avoiding the added throughput associated with interlocking, and just allowing for a reduced single cycle throughput. The choice to go with a reduced instruction set allowed for the creation of a processor with far fewer transistors than the Complex Instruction Set Computer (CISC) alternative, which also allows for more space for an increased number of registers in the CPU.
+The choice to go with a reduced instruction set allowed for the creation of a processor with far fewer transistors than the Complex Instruction Set Computer (CISC) alternative, which also allows for more space for an increased number of registers in the CPU.
 MIPS 1 Bottlenecks:
 1.	In the MIPS 1, load delay slots were used immediately after lines of code which would load a register from memory. This essentially caused a CPU delay to allow for the time to move an instruction from memory to a register.
 However, this meant that if there was not another instruction already loaded to a register that could be run during the delay, which does not depend on the instruction being loaded by the previous instruction or on the result from this instruction, the CPU is simply waiting for the next instruction and is not being used.
@@ -65,5 +58,24 @@ In MIPS 2, the load delay slot was removed. They are not often used anymore beca
 If we consider an ADD operation;
 In a load/store approach both of the operands and the destination must be in registers. This requires three loads from memory and three free registers (for operands 1 and 2, and the destination for the result in memory).
 In a register/memory architecture however, operations can be performed on (or from) memory as well as registers.
-A potential solution to this issue may be to incorporate certain aspects of CISC systems for operations such as this, and trying to combine the better qualities of each type of system. This does seem to be what many hardware manufacturers are doing nowadays.
-X86:
+This meant that if data were mostly used just once before being discarded, it could be slower to load these into a register first and read them from there. However, if they were used more than once, it would be quicker to first load them to registers and retrieve the values multiple times from there, as getting information from a register is significantly quicker than getting it from memory.
+A potential solution to this issue may be to incorporate certain aspects of CISC systems for operations such as this, and trying to combine the better qualities of each type of system. This does seem to be what many hardware manufacturers are doing nowadays to handle memory management better in modern operating systems. Many microprocessors today will use a mixture of RISC and CISC, or are designed to handle conversion from one to another such as a CISC-like ISA that breaks down complex instructions into a larger number of simpler (reduced) instructions. 
+3.	As the name MIPS suggests, a major aspect of the design of these microprocessors was to avoid the use of interlocking pipelined stages, and instead to fit every sub-phase, including cache-access, of the instructions into one cycle. The idea was that this would minimise throughput by avoiding the added throughput associated with interlocking, and just allowing for a reduced single cycle throughput. However, this was found to not be worth the trade-off of the more complex CPU/compiler code required, and in later versions of their hardware, interlocking pipelined stages were introduced.
+Almost all systems nowadays use interlocking pipelined stages. This means that the hardware will correct issues that occur in a pipeline, and the developer is not required to ensure they have inserted the correct number of NOPs (No Operation commands) for the given hardware to ensure pipeline hazards are avoided, or to account for the different types of hardware that may use the code and their respective delays.
+
+Pentium 2:
+The Pentium 2 processor was first introduced by Intel in 1997, and contained many improvements on the preceding Pentium Pro.
+While performance with 32-bit software remained largely unchanged, there was significant improvement over the Pentium Pro when working with 16-bit software, which many programs still used and which still made up much of the codebase of Windows 95 drivers. Many of the other major improvements to the Pentium 2 focussed on improving performance while keeping the price of the processor low.
+Pentium 2 Bottlenecks:
+1.	Early versions of the Pentium 2 processor allowed for only 512MB of RAM to be cached. More RAM than this could be added, but this would not be effectively used and would be very slow. While this did not affect typical home-users much, this was an issue when it came to larger systems such as servers that would frequently require more RAM than this.
+The bottleneck here was with the L2 cache controller / tag RAM chip (L2 chip) which had a combined cache of 512MB and ran at half the clock speed of the processor. Significant improvements were later made to later versions of the Pentium 2 processor which increased the clock speed of the L2 chip to match half the performance of the processor’s increased speed, and eventually to release an L2 chip with a cache of 4GB similar to the predecessor Pentium Pro.
+In Modern OSs, 32-bit Windows OSs are even now still limited to a maximum RAM capacity of 4GB. This can vary dramatically however, depending on the system hardware and OS being used. For example, a 64-bit Linux system can theoretically support up to 17 billion GB of RAM, though most cap out at 1TB (Intel) or 256TB (AMD64). Given the price of RAM nowadays though, your credit card limit is likely to cap out before any of these.
+2.	The L2 cache was not on the processor. As the creation of the Pentium 2 was focussed primarily on reducing costs and improving 16-bit code execution, the L2 cache was not included on the main processor and instead was moved to a back-side bus. This was much slower to access on the bus than on the processor.
+To try to ameliorate this issue, the Pentium 2 had a 32KB L1 cache that was on the processor and 4 write buffers, both of which were twice the size of the predecessor’s L1 cache and write buffer count. Additionally, the 4 write buffers could be used by either pipe[2], rather than each only having access to one like it’s predecessor.
+
+The simplest way to solve this bottleneck would be to find a way to put the L2 cache directly on the processor, or otherwise minimise the distance between the L2 cache and the processor. While the steps already taken, such as increasing the L1 cache size and increasing the number of write buffers and their access to pipelines, do a lot to improve the performance, this does not improve the speed of accessing the L2 cache. However, as other solutions, increasing the L1 cache further or adding more pipelines would also help to speed up the system, but may not be cost or space efficient. This issue was solved in Pentium 3 by putting the L2 cache directly onto the processor.
+
+In modern hardware, the distance between the cache and processor has been minimized as much as possible in most systems, the cache size has been dramatically increased to many MB in high-end processors, and CPUs (and software) are often multithreaded now to perform calculations at many times the rates possible before. While this is all positive for performance, there are diminishing returns on many of the techniques being used, such as cache hit rates dropping and cost becoming substantial as cache sizes increase[3]. Regardless, new techniques around cache design, computer architecture, memory management, etc continue to be investigated to look for ways to improve performance in new systems.
+
+[2]  https://ftp.utcluj.ro/pub/docs/publicatii/intel/pentiumII.pdf
+[3] https://www.extremetech.com/extreme/188776-how-l1-and-l2-cpu-caches-work-and-why-theyre-an-essential-part-of-modern-chips
