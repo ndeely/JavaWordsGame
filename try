@@ -1,5 +1,3 @@
-
----------------------------------------
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -25,17 +23,24 @@ public class fasanGame {
         private String p2;
         private String actualplayer;
         
+        
+        
 
 	public fasanGame() {
                 showIntro();
-                startNameplayers();
+                
+            System.out.print("Please enter player one name: ");
+            p1Name = sc.nextLine();
+            System.out.print("Please enter player two name: ");
+            p2Name = sc.nextLine();
+                getPlayerName(roundWinner);
 		readGameCountInt(); //set gameCount
 		while(this.gameCount > 0) {
 			playGame(this.lives);
 			gameCount -= 1;
 		}
 	}
-        
+
 String p1Name;
 String p2Name;
 String winner;
@@ -43,11 +48,8 @@ String winner;
         
 public String getPlayerName(int roundWinner) {
             
-            Scanner sc = new Scanner(System.in);
-            System.out.print("Please enter player one name: ");
-            p1Name = sc.nextLine();
-            System.out.print("Please enter player two name: ");
-            p2Name = sc.nextLine();
+            
+
    
         
             
@@ -56,13 +58,26 @@ public String getPlayerName(int roundWinner) {
             } else {
             winner = p2Name;
         
-                String winnername = getPlayerName();
+                String winnername = getPlayerName(roundWinner);
 
         
                }
+            
+       
+            
+            /* if(roundWinner == 1){
+                actualplayer = p1Name;
+            }else if(roundWinner == 2){
+               actualplayer = p2Name;
             }
+            p1 = p1Name;
+            p2 = p2Name;
+            
+            
+        */
+
         
-	//display number of lives, inform players about points
+        //display number of lives, inform players about points
 	public void showIntro() {
 		String introString = "===   Welcome to    ===\n=== JAVA WORDS GAME ===\n";
 		introString += "Each player will receive " + lives + " lives.\n";
@@ -174,19 +189,3 @@ public String getPlayerName(int roundWinner) {
 
 	}
 }
-
-String winner;
-if (roundWinner==1){
- winner = p1;
-} else if {
- winner = p2;
-}
-
-Public String getPlayerName(int playerNumber) {
-If(playerNumber == 1) {
-Return player1Name;
-} Else {
-Return player2Name;
-}
-}
-String winner= getplayerName;
