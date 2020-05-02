@@ -52,7 +52,8 @@ public String getPlayerName(int roundWinner) {
             winner = p1Name;
             } else {
             winner = p2Name;
-            String winnername = getPlayerName(roundWinner);
+            String winner = getPlayerName(roundWinner);
+            
             
         }
 }        
@@ -168,4 +169,3 @@ public String getPlayerName(int roundWinner) {
 
 	}
 }
-
