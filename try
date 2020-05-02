@@ -52,11 +52,10 @@ public String getPlayerName(int roundWinner) {
             winner = p1Name;
             } else {
             winner = p2Name;
-            String winner = getPlayerName(roundWinner);
-            
+            return winner;
             
         }
-}        
+}       
         //display number of lives, inform players about points
 	public void showIntro() {
 		String introString = "===   Welcome to    ===\n=== JAVA WORDS GAME ===\n";
@@ -169,3 +168,4 @@ public String getPlayerName(int roundWinner) {
 
 	}
 }
+
