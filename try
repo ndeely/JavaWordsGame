@@ -19,20 +19,21 @@ public class fasanGame {
 	private int gameCount; //games to be played
 	Scanner sc = new Scanner(System.in);
 	private int roundWinner = (int)(Math.random() * 2 + 1); //pick random first round winner to start
-        private String p1;
-        private String p2;
-        private String actualplayer;
+        private String actualplayer = getPlayerName(int roundWinner);
         
         
         
 
 	public fasanGame() {
-                showIntro();
-                
+               showIntro();
+            
+            String p1Name;
+            String p2Name;   
             System.out.print("Please enter player one name: ");
             p1Name = sc.nextLine();
             System.out.print("Please enter player two name: ");
             p2Name = sc.nextLine();
+                
                 getPlayerName(roundWinner);
 		readGameCountInt(); //set gameCount
 		while(this.gameCount > 0) {
@@ -41,27 +42,20 @@ public class fasanGame {
 		}
 	}
 
-String p1Name;
-String p2Name;
+
 String winner;
 
         
 public String getPlayerName(int roundWinner) {
-            
-            
-
-   
-        
             
             if (roundWinner==1){
             winner = p1Name;
             } else {
             winner = p2Name;
         
-                String winnername = getPlayerName(roundWinner);
-
-        
-               }
+            String winnername = getPlayerName(roundWinner);
+            
+        }
             
        
             
