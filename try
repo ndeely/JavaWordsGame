@@ -1,0 +1,18 @@
+        public void startNameplayers() {
+            String p1Name;
+            String p2Name;
+
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Please enter player one name: ");
+            p1Name = sc.nextLine();
+            System.out.print("Please enter player two name: ");
+            p2Name = sc.nextLine();
+            
+            if(roundWinner == 1){
+                actualplayer = p1Name;
+            }else if(roundWinner == 2){
+               actualplayer = p2Name;
+            }
+            p1 = p1Name;
+            p2 = p2Name;
+        }
