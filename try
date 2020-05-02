@@ -1,21 +1,3 @@
-        public void startNameplayers() {
-            String p1Name;
-            String p2Name;
-
-            Scanner sc = new Scanner(System.in);
-            System.out.print("Please enter player one name: ");
-            p1Name = sc.nextLine();
-            System.out.print("Please enter player two name: ");
-            p2Name = sc.nextLine();
-            
-            if(roundWinner == 1){
-                actualplayer = p1Name;
-            }else if(roundWinner == 2){
-               actualplayer = p2Name;
-            }
-            p1 = p1Name;
-            p2 = p2Name;
-        }
 
 ---------------------------------------
 /*
@@ -54,24 +36,31 @@ public class fasanGame {
 		}
 	}
         
-        public void startNameplayers() {
-            String p1Name;
-            String p2Name;
+String p1Name;
+String p2Name;
+String winner;
 
+        
+public String getPlayerName(int roundWinner) {
+            
             Scanner sc = new Scanner(System.in);
             System.out.print("Please enter player one name: ");
             p1Name = sc.nextLine();
             System.out.print("Please enter player two name: ");
             p2Name = sc.nextLine();
+   
+        
             
-            if(roundWinner == 1){
-                actualplayer = p1Name;
-            }else if(roundWinner == 2){
-               actualplayer = p2Name;
+            if (roundWinner==1){
+            winner = p1Name;
+            } else {
+            winner = p2Name;
+        
+                String winnername = getPlayerName();
+
+        
+               }
             }
-            p1 = p1Name;
-            p2 = p2Name;
-        }
         
 	//display number of lives, inform players about points
 	public void showIntro() {
