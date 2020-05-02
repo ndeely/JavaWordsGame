@@ -19,22 +19,22 @@ public class fasanGame {
 	private int gameCount; //games to be played
 	Scanner sc = new Scanner(System.in);
 	private int roundWinner = (int)(Math.random() * 2 + 1); //pick random first round winner to start
-        private String actualplayer = getPlayerName(int roundWinner);
+        private String actualplayer = getPlayerName(roundWinner);
+        private String p1Name;
+        private String p2Name;  
         
         
         
 
 	public fasanGame() {
                showIntro();
-            
-            String p1Name;
-            String p2Name;   
+           
             System.out.print("Please enter player one name: ");
             p1Name = sc.nextLine();
             System.out.print("Please enter player two name: ");
             p2Name = sc.nextLine();
                 
-                getPlayerName(roundWinner);
+                
 		readGameCountInt(); //set gameCount
 		while(this.gameCount > 0) {
 			playGame(this.lives);
@@ -52,25 +52,10 @@ public String getPlayerName(int roundWinner) {
             winner = p1Name;
             } else {
             winner = p2Name;
-        
             String winnername = getPlayerName(roundWinner);
             
         }
-            
-       
-            
-            /* if(roundWinner == 1){
-                actualplayer = p1Name;
-            }else if(roundWinner == 2){
-               actualplayer = p2Name;
-            }
-            p1 = p1Name;
-            p2 = p2Name;
-            
-            
-        */
-
-        
+}        
         //display number of lives, inform players about points
 	public void showIntro() {
 		String introString = "===   Welcome to    ===\n=== JAVA WORDS GAME ===\n";
@@ -174,12 +159,13 @@ public String getPlayerName(int roundWinner) {
 		if((p1Lives== 0) && (p2Lives == 0)){
                 System.out.println("No one won the game");
             }else if(p1Lives == 0){
-                System.out.println("The winner is " + p1);
+                System.out.println("The winner is " + p1Name);
             }else if(p2Lives == 0){
-                System.out.println("The winner is " + p2);
+                System.out.println("The winner is " + p2Name);
             }
             System.out.println("Player 1 accumulated " + this.p1Points );
             System.out.println("Player 2 accumulated " + this.p2Points );
 
 	}
 }
+
