@@ -1,0 +1,18 @@
+actualplayer = getPlayerName(this.roundWinner);
+            int currentPlayer = this.roundWinner;
+                // int randNo = (int)(Math.random() * 26);
+            Random rnd = new Random();
+            char startWith = (char) (rnd.nextInt(26) + 'a');
+            String startTWOletters=String.valueOf(c);  
+            //String startWith = "abcdefghijklmnopqrstuvwxyz".substring(randNo, randNo + 1);
+            boolean playing = true;
+            while(playing) {
+                
+            String startingWord=String.valueOf(startWith); 
+                System.out.println("----------------------------------");
+                System.out.println("Player " + actualplayer + "'s turn. Please enter a word beginning with '" + startWith + " ': " );
+                System.out.println("----------------------------------");
+                String currentWord = this.sc.next();
+                if(new LimitedVocabulary().isValidWord(currentWord)) {
+                    countVowels(currentPlayer, currentWord);
+                    startTWOletters = currentWord.substring(currentWord.length() - 2);
