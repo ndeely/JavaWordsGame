@@ -1,18 +1,188 @@
-actualplayer = getPlayerName(this.roundWinner);
-            int currentPlayer = this.roundWinner;
-                // int randNo = (int)(Math.random() * 26);
-            Random rnd = new Random();
-            char startWith = (char) (rnd.nextInt(26) + 'a');
-            String startTWOletters=String.valueOf(c);  
-            //String startWith = "abcdefghijklmnopqrstuvwxyz".substring(randNo, randNo + 1);
-            boolean playing = true;
-            while(playing) {
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package fasan;
+
+import java.util.Random;  //imports random
+import java.util.Scanner;  //imports scanner 
+
+
+/**
+ *
+ * @author Lenovo
+ */
+public class fasanGame {
+    private int stamina = 5; //stamina= life at the start of the game
+    private int StaminaPlayer1, StaminaPlayer2; //player 1 and 2 stamina
+    private int PointsforPlayer1, PointsforPlayer2; //player 1 and 2 points
+    private int LoopGame; //as task I had to ask firstly the user how many games he wants to play , the variable stores the answer of the user
+    Scanner sc = new Scanner(System.in); 
+    private int firstLetter = (int)(Math.random() * 2 + 1); //random player will start playing
+    private String actualplayer = getPlayerName(firstLetter); // gets the name of the player and correlate it to the first and the second player, depending on who´s turn is in the game
+    private String Player1Name; // variable the sores the name of the first player
+    private String Player2Name;  // variable the sores the name of the first player
+    
+    // constructor that starts the game, takes also the input of the player, open the big loop that contain the rest of the methods   
+    
+public fasanGame() {
+       displayBeginning();
+
+    System.out.println("----------------------------------");   
+    System.out.println("Player one: Enter your name here: ");
+    System.out.println("----------------------------------");
+    Player1Name = sc.nextLine();
+    System.out.println("----------------------------------");
+    System.out.println("Player two: Enter your name here: ");
+    System.out.println("----------------------------------");
+    Player2Name = sc.nextLine();
+
+    GeneralLoop(); //set LoopGame
+    while(this.LoopGame > 0) {
+            playGame(this.stamina);
+            LoopGame -= 1;
+    }
+}
+        //display number of lives, inform players about points
+	public void displayBeginning() {
+            System.out.println("------------------------------------------------------------------");
+            String introString = "          *************  JAVA WORDS GAME  ************* \n";
+            introString += ("------------------------------------------------------------------\n");
+            introString += ("\n");
+            introString += "Each player will receive " + stamina + " stamina(lives).\n";
+            introString += "The game of words, start your word with the LAST TWO LETTERS from the last word \n";
+            introString += "The player receives the same amount of\n" +"points as the number of characters in the\n" +"word when the word contains no vowels;\n" +"otherwise 1 point.\n";
+            System.out.println(introString);
+        }
+        
+        String possible_winner;
+
+    public String getPlayerName(int firstLetter) {
+            
+            if (firstLetter==1){
+            possible_winner = Player1Name;
+            } else {
+            possible_winner = Player2Name;
+            
+        }
+        return possible_winner;
+    }       
+    public void GeneralLoop() { //create general Loop
+        boolean iError = true; //input error
+        while(iError) {
+            System.out.println("----------------------------------");
+            System.out.println("How many games would you like to play?");
+            System.out.println("----------------------------------");
+            if(sc.hasNextInt()) {
+                this.LoopGame = sc.nextInt();
+                if(this.LoopGame >= 0) {
+                        iError = false;
+                } else if(this.LoopGame < 0) {
+                    System.out.println("----------------------------------");
+                    System.out.println("Invalid number, please try again.");
+                    System.out.println("----------------------------------");
+                } else {
+                    System.out.println("----------------------------------");
+                    System.out.println("Congratulations! You have successfully played 0 games!");
+                    System.out.println("----------------------------------");
+                    gameEnd();
+                    iError = false;
+                }
+            } else {
+                System.out.println("----------------------------------");
+                System.out.println("That's not a number.");
+                System.out.println("----------------------------------");
+                sc.reset();
+                sc.next();
+            }
+        }
+    }
+
+    public void playGame(int stamina) {
+            this.StaminaPlayer1 = this.StaminaPlayer2 = stamina; //sets lives for game
+            this.PointsforPlayer1 = this.PointsforPlayer2 = 0; //starts players with 0 points
+            while(this.StaminaPlayer1 != 0 & this.StaminaPlayer2 != 0) {
+                    playRound();
+            }
+            gameEnd();
+    }
+
+    //pick random letter
+    //first player picks word beginning with letter
+    //second player picks word beginning with last two letters of previous word
+    //repeat
+    //ends with -
+    //round winner starts next round
+
+    public void playRound() {
+        actualplayer = getPlayerName(this.firstLetter);
+            int currentPlayer = this.firstLetter;
+                    // int randNo = (int)(Math.random() * 26);
+                Random rnd = new Random();
+                char startWith = (char) (rnd.nextInt(26) + 'a');
+                String FirtsTwoLetters=String.valueOf(startWith);  
+                //int randNo = (int)(Math.random() * 26);
                 
-            String startingWord=String.valueOf(startWith); 
-                System.out.println("----------------------------------");
-                System.out.println("Player " + actualplayer + "'s turn. Please enter a word beginning with '" + startWith + " ': " );
-                System.out.println("----------------------------------");
-                String currentWord = this.sc.next();
-                if(new LimitedVocabulary().isValidWord(currentWord)) {
-                    countVowels(currentPlayer, currentWord);
-                    startTWOletters = currentWord.substring(currentWord.length() - 2);
+		//String startWith = "abcdefghijklmnopqrstuvwxyz".substring(randNo, randNo + 1);
+		boolean playing = true;
+		while(playing) {
+			System.out.println("Player " + currentPlayer + "'s turn. Please enter a word beginning with '" + startWith + "':");
+			String currentWord = this.sc.next();
+			//if word is valid, assign points, switch startsWith and currentPlayer
+			if(new LimitedVocabulary().isValidWord(currentWord)) {
+				countVowels(currentPlayer, currentWord);
+				FirtsTwoLetters = currentWord.substring(currentWord.length() - 2);
+				currentPlayer = (currentPlayer == 1) ? 2 : 1;
+			} else if (currentWord.equals("-")) {
+				if(currentPlayer == 1) {
+					this.StaminaPlayer1 -= 1;
+				} else {
+					this.StaminaPlayer2 -= 1;
+				}
+				System.out.println("Player " + currentPlayer + " lost a life!");
+				this.firstLetter = (currentPlayer == 1) ? 2 : 1; //set round winner as other player
+				System.out.println("Current Lives:\n " + Player1Name + " : " + this.StaminaPlayer1 + " \n " + Player2Name + " : " + this.StaminaPlayer2);
+				playing = false;
+			} else {
+				System.out.println("----------------------------------");
+                                System.out.println("Invalid word");
+                                System.out.println("----------------------------------");
+			}
+		}
+	}
+    //counts vowels in words, and assigns appropriate player points
+    public void countVowels(int player, String word) {
+        String[] vowels = "aeiou".split("");
+        String[] letters = word.split("");
+        int points = 0;
+        for(String letter:letters) {
+                for(String vowel:vowels) {
+                        if(letter.equals(vowel)) {
+                                points += 1;
+                        }
+                }
+        }
+        if(player == 1) {
+                this.PointsforPlayer1 += points;
+        } else {
+                this.PointsforPlayer2 += points;
+        }
+        System.out.println("----------------------------------");
+        System.out.println("Player " + actualplayer + " has gained " + points + " points with the word " + word + "!");
+        System.out.println("----------------------------------");
+    }
+
+    public void gameEnd() {
+        if((StaminaPlayer1== 0) && (StaminaPlayer2 == 0)){
+            System.out.println("No one won the game");
+        }else if(StaminaPlayer1 == 0){
+            System.out.println("The winner is " + Player1Name);
+        }else if(StaminaPlayer2 == 0){
+            System.out.println("The winner is " + Player2Name);
+        }
+        System.out.println(Player1Name + " accumulated " + this.PointsforPlayer1 );
+        System.out.println(Player2Name + " accumulated " + this.PointsforPlayer2 );
+
+    }
+}
