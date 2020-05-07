@@ -36,7 +36,6 @@ public JavaWordGames() {
     GeneralLoop(); //set LoopGame
     while(this.LoopGame > 0) {
             InitialSettings(this.stamina);
-            LoopGame -= 1;
     }
 }
     //display number of lives, inform players about Points
@@ -244,22 +243,22 @@ public void FinishGame() {
     if(StaminaPlayer1== 0) {
         System.out.println("WINNER of the game : " + Player2Name);
         System.out.println("   ***     * :) *    ***       ");
-        //Games remaining with singular/plural distiction
-        this.LoopGame --;
-        if(this.LoopGame == 1){
-            System.out.println("-----------------------------------------------------------------");
-            System.out.println(" Only " + this.LoopGame + " games left ");
-            System.out.println("-----------------------------------------------------------------");
-        }else{
-            System.out.println("-----------------------------------------------------------------");
-            System.out.println("We will play for " + this.LoopGame + " games more ");
-            System.out.println("-----------------------------------------------------------------");
-        }
 
     }else if(StaminaPlayer2 == 0){
         System.out.println("WINNER of the game : " + Player1Name);
         System.out.println("   ***     * :) *    ***       ");
     }
+    //Games remaining with singular/plural distiction
+	this.LoopGame --;
+	if(this.LoopGame == 1){
+		System.out.println("-----------------------------------------------------------------");
+		System.out.println(" Only " + this.LoopGame + " game left ");
+		System.out.println("-----------------------------------------------------------------");
+	}else{
+		System.out.println("-----------------------------------------------------------------");
+		System.out.println("We will play for " + this.LoopGame + " games more ");
+		System.out.println("-----------------------------------------------------------------");
+	}
 
     //print total points acumulated during the game
     System.out.println("###   Points summary   ###" );
