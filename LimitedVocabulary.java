@@ -1,13 +1,14 @@
+import java.util.Arrays;
+import java.util.Scanner;  //imports scanner
+
+
+
 /**
-a limited vocabulary with 1024 english words encoded as a 1D array of words
-
-words source: https://gist.github.com/deekayen/4148741
--- from the above list of words have been kept only the words that have at least 3 letters
--- in addition, several words have been added so that there exist words that start with every letter of the english alphabet
-*/
-
-public class LimitedVocabulary{
-	private String[] words = {
+ *
+ * @author Lenovo
+ */
+public class LimitedVocabulary {
+	private String[] StringBecomesWord = {
 		"able",
 		"about",
 		"above",
@@ -1032,14 +1033,60 @@ public class LimitedVocabulary{
 		"zoo",
 		"zookeeper",
 		"zoologist"
-	};  // here ends the 1D array of words
+	};  // here ends the 1D array of StringBecomesWord
 
-	public boolean isValidWord(String attempt) {
-		for(String word:this.words) {
-			if(attempt.equalsIgnoreCase(word)) {
-				return true;
-			}
-		}
-		return false;
+
+    // print whole word array
+    public  void PrintArray(){
+        for(int i = 0; i < StringBecomesWord.length; i++)
+        System.out.println(StringBecomesWord[i]);
+
+    }
+    //initialize scanner
+    Scanner input = new Scanner(System.in);
+    //search word in the array
+    public void SearchWordInArray() {
+    // ask for input
+    System.out.println("Check if the word that you will play is in our Vocabulary list}\n" + "If you find the word use it with knowledge and block your opponent");
+    System.out.println("---------------------------------------------------------------------------");
+    String SearchWord = this.input.next();
+    // initialize value to search
+    String valueToSearch = SearchWord;
+    // initialize boolean variable
+    boolean isExists = false;
+    // iterate over array
+    for (int i = 0; i < StringBecomesWord.length; i++) {
+       // get the value at current array index
+       String arrayValue = StringBecomesWord[i];
+       // compare values
+       if (valueToSearch.equals(arrayValue)) {
+          isExists = true;
+          // if value is found, terminate the loop
+          break;
+     }
+  }
+      if (isExists) {
+         System.out.println("-------------------------------");
+         System.out.println("The String " + SearchWord + " ,that you are looking for WAS found in the array");
+      } else {
+         System.out.println("---------------------------------");
+	 System.out.println("The String " + SearchWord + " ,that you are looking for WAS NOT found in the array");
+      }
+   }
+
+      // prove if the word that has been inputed can be paired in the dictionary
+	public boolean WordInDictionary(String attempt) {
+            for(int i = 0; i < StringBecomesWord.length; i++) {
+                 //Here go the word you used
+                String InputedTryWord = StringBecomesWord[i];
+                    if(attempt.equalsIgnoreCase(InputedTryWord)) {
+                            return true;
+                    }
+            }
+            return false;
 	}
-}
+    }
+
+
+
+
