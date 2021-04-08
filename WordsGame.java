@@ -25,17 +25,21 @@ public class WordsGame {
 
 	//show introduction screen
 	private void showIntro() {
-		String introString = "===   Welcome to    ===\n=== JAVA WORDS GAME ===\n\n";
-		introString += "=== GAME DESCRIPTION ===\n\n";
-		introString += "The aim of the game is to avoid being the first player to lose all your lives.\n\n";
-		introString += "The first player to take their turn in each round must choose a valid word\nstarting with the randomly chosen letter given.\n\n";
-		introString += "The word chosen for each subsequent turn must begin with the last two letters\nof the previous player's valid word.\n";
-		introString += "\nWords must:\n";
-		introString += "- Be at least 3 letters long\n";
-		introString += "- Contain no characters outside of the English alphabet\n";
-		introString += "- Start with the letter/letters stated\n";
-		introString += "- Be a valid word in the list OR be a valid word as agreed by both players\n";
-		introString += "\nIf you cannot think of a valid word to meet the criteria, you can enter '-'\nand you will lose a life and end the round.\n\n";
+		String introString =
+			"===   Welcome to    ===\n=== JAVA WORDS GAME ===\n\n" +
+			"=== GAME DESCRIPTION ===\n\n" +
+			"The aim of the game is to avoid being the first player to lose all your lives.\n\n" +
+			"The first player to take their turn in each round must choose a valid word\n" +
+			"starting with the randomly chosen letter given.\n\n" +
+			"The word chosen for each subsequent turn must begin with the last two letters\n" +
+			"of the previous player's valid word.\n" +
+			"\nWords must:\n" +
+			"- Be at least 3 letters long\n" +
+			"- Contain no characters outside of the English alphabet\n" +
+			"- Start with the letter/letters stated\n" +
+			"- Be a valid word in the list OR be a valid word as agreed by both players\n" +
+			"\nIf you cannot think of a valid word to meet the criteria, you can enter '-'\n" +
+			"and you will lose a life and end the round.\n\n";
 		System.out.println(introString);
 	}
 
